@@ -10,6 +10,7 @@ package com.bru.graphics.display;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 
 public class Display extends Canvas {
 
@@ -24,7 +25,7 @@ public class Display extends Canvas {
 		this.width = width;
 		this.height = height;
 		setSize(width, height);
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
 	}
 
 	public void draw() {
@@ -34,6 +35,13 @@ public class Display extends Canvas {
 			}
 		}
 		repaint();
+	}
+
+	//TODO
+	public void processFrame(byte[] frame, int width, int height)
+	{
+		byte[] imgData = ((DataBufferByte)image.getRaster().getDataBuffer()).getData();
+		System.arraycopy(frame,0,imgData,0,frame.length);
 	}
 
 	public void paint(Graphics g){
