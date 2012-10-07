@@ -1,4 +1,4 @@
-package com.bru.graphics.display;
+package examples;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;

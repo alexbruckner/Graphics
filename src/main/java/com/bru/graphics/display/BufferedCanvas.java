@@ -18,7 +18,7 @@ public class BufferedCanvas extends Canvas implements Display {
 
 	private BufferedImage image;
 
-	private BufferedCanvas(int width, int height) {
+	public BufferedCanvas(int width, int height) {
 		this.width = width;
 		this.height = height;
 		setSize(width, height);

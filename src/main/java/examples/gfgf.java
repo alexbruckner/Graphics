@@ -1,4 +1,4 @@
-package com.bru.graphics.display;
+package examples;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Graphics;
