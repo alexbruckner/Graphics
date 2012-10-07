@@ -21,17 +21,19 @@ public class BufferedCanvasTest {
 		int height = 200;
 		int red = Color.RED.getRGB();
 
-		final Change[] changes = new Change[width*height];
+		final int[] colors = new int[width*height];
 		for (int i = 0; i < width; i++){
 			for (int j = 0; j < height; j++){
-				changes[i*height+j] = new Change(i,j,red);
+				colors[i*height+j] = red;
 			}
 		}
+
+		final Change change = new Change(0,0,width,height,colors);
 
 		SwingUtilities.invokeAndWait(new Runnable() {
 			public void run() {
 				Display display = new BufferedCanvas(300, 200);
-				display.updatePixels(changes);
+				display.updatePixels(change);
 			}
 		});
 

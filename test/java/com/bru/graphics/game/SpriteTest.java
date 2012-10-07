@@ -19,8 +19,10 @@ public class SpriteTest {
 	public void test() throws IOException, InterruptedException {
 		Sprite test = new Sprite(new File("test/resources/Clear4j_trans.png"));
 		Display display = new BufferedCanvas(800,600);
+		Thread.sleep(1000);
 		for (int i = 0; i < 400; i++){
 			test.draw(display,i,i);
+			Thread.sleep(2);
 		}
 		Thread.sleep(5000);
 	}

@@ -7,11 +7,14 @@ package com.bru.graphics.display;
  * Time: 10:46
  */
 public class Change {
-	public int x,y,color;
+	public int x, y, w, h;
+	public int[] colors;
 
-	public Change(int x, int y, int color) {
+	public Change(int x, int y, int w, int h, int[] colors) {
 		this.x = x;
 		this.y = y;
-		this.color = color;
+		this.w = w;
+		this.h = h;
+		this.colors = colors;
 	}
 }

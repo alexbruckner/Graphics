@@ -35,22 +35,8 @@ public class Sprite {
 	}
 
 	public void draw(Display display, int x, int y){
-		final Change[] changes = new Change[width*height];
-		int red = Color.RED.getRGB();
-		int cnt = 0;
-		for (int i = 0; i < width; i++){
-			for (int j = 0; j < height; j++){
-				changes[cnt++] = new Change(i+x,j+y, data[j*width+i]);
-			}
-		}
-		display.updatePixels(changes);
+		Change change = new Change(x,y,width,height,data);
+		display.updatePixels(change);
 	}
-
-//	private int convertToInt(byte r, byte g, byte b){
-//		return ((255 & 0xFF) << 24) | //alpha
-//				(((int)r & 0xFF) << 16) | //red
-//				(((int)g & 0xFF) << 8)  | //green
-//				(((int)b & 0xFF) << 0); //blue
-//	}
 
 }

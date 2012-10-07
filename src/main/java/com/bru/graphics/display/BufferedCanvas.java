@@ -18,32 +18,15 @@ public class BufferedCanvas extends Canvas implements Display {
 
 	public BufferedCanvas(int width, int height) {
 		setSize(width, height);
-		image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		display();
 	}
 
-	public void updatePixels(Change[] changes) {
-
-		for (Change change : changes) {
-			image.setRGB(change.x, change.y, change.color); //TODO check performance of setRGB
-		}
+	public void updatePixels(Change change) {
+		image.getRaster().setDataElements(change.x, change.y, change.w, change.h, change.colors);
 		repaint();
-		System.out.println();
 	}
-//
-//	private static void copySrcIntoDstAt(final BufferedImage src,
-//										 final BufferedImage dst, final int dx, final int dy) {
-//		int[] srcbuf = ((DataBufferInt) src.getRaster().getDataBuffer()).getData();
-//		int[] dstbuf = ((DataBufferInt) dst.getRaster().getDataBuffer()).getData();
-//		int width = src.getWidth();
-//		int height = src.getHeight();
-//		int dstoffs = dx + dy * dst.getWidth();
-//		int srcoffs = 0;
-//		for (int y = 0 ; y < height ; y++ , dstoffs+= dst.getWidth(), srcoffs += width ) {
-//			System.arraycopy(srcbuf, srcoffs , dstbuf, dstoffs, width);
-//		}
-//	}
-//
+
 	public void paint(Graphics g) {
 		g.drawImage(image, 0, 0, this);
 	}
