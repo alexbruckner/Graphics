@@ -19,10 +19,12 @@ public class SpriteTest {
 	@Test
 	public void test() throws IOException, InterruptedException {
 		Sprite test = new Sprite(new File("test/resources/Clear4j_trans.png"));
+		Sprite test2 = new Sprite(new File("test/resources/Clear4j_trans.png"));
 		Display display = new BufferedCanvas(800,600);
 		Thread.sleep(1000);
-		Sprite[] sprites = new Sprite[1];
+		Sprite[] sprites = new Sprite[2];
 		sprites[0] = test;
+		sprites[1] = test2;
 		for (int i = 0; i < 400; i++){
 			test.x = test.y = i;
 			display.draw(sprites);
