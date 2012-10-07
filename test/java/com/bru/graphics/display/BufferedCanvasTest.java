@@ -1,9 +1,11 @@
 package com.bru.graphics.display;
 
+import junit.framework.Assert;
 import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,7 +16,7 @@ import java.awt.*;
 public class BufferedCanvasTest {
 
 	@Test
-	public void test() throws InterruptedException {
+	public void test() throws InterruptedException, AWTException, InvocationTargetException {
 		int width = 300;
 		int height = 200;
 		int red = Color.RED.getRGB();
@@ -26,14 +28,20 @@ public class BufferedCanvasTest {
 			}
 		}
 
-		SwingUtilities.invokeLater(new Runnable() {
+		SwingUtilities.invokeAndWait(new Runnable() {
 			public void run() {
 				Display display = new BufferedCanvas(300, 200);
 				display.updatePixels(changes);
 			}
 		});
 
-		Thread.currentThread().join();
+
+		Thread.sleep(1000);
+
+		Robot r = new Robot();
+		Color color = r.getPixelColor(100, 100);
+
+		Assert.assertEquals(Color.red, color);
 
 	}
 
