@@ -13,14 +13,9 @@ import java.awt.image.BufferedImage;
 
 public class BufferedCanvas extends Canvas implements Display {
 
-	private int width;
-	private int height;
-
 	private BufferedImage image;
 
 	public BufferedCanvas(int width, int height) {
-		this.width = width;
-		this.height = height;
 		setSize(width, height);
 		image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
 		display();
@@ -47,28 +42,6 @@ public class BufferedCanvas extends Canvas implements Display {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-	public static void main(String[] args) {
-
-		int width = 300;
-		int height = 200;
-		int red = Color.RED.getRGB();
-
-		final Change[] changes = new Change[width*height];
-		for (int i = 0; i < width; i++){
-			for (int j = 0; j < height; j++){
-				changes[i*height+j] = new Change(i,j,red);
-			}
-		}
-
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				BufferedCanvas display = new BufferedCanvas(300, 200);
-				display.updatePixels(changes);
-			}
-		});
-
 	}
 
 }
