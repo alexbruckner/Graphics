@@ -10,7 +10,6 @@ package com.bru.graphics.display;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 public class BufferedCanvas extends Canvas implements Display {
 
@@ -22,8 +21,10 @@ public class BufferedCanvas extends Canvas implements Display {
 		display();
 	}
 
-	public void updatePixels(Change change) {
-		image.getRaster().setDataElements(change.x, change.y, change.w, change.h, change.colors);
+	public void draw(Sprite[] sprites) {
+		for (Sprite sprite : sprites){
+			image.getRaster().setDataElements(sprite.x, sprite.y, sprite.width, sprite.height, sprite.colors);
+		}
 		repaint();
 	}
 

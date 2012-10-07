@@ -2,6 +2,7 @@ package com.bru.graphics.game;
 
 import com.bru.graphics.display.BufferedCanvas;
 import com.bru.graphics.display.Display;
+import com.bru.graphics.display.Sprite;
 import org.junit.Test;
 
 import java.io.File;
@@ -20,8 +21,11 @@ public class SpriteTest {
 		Sprite test = new Sprite(new File("test/resources/Clear4j_trans.png"));
 		Display display = new BufferedCanvas(800,600);
 		Thread.sleep(1000);
+		Sprite[] sprites = new Sprite[1];
+		sprites[0] = test;
 		for (int i = 0; i < 400; i++){
-			test.draw(display,i,i);
+			test.x = test.y = i;
+			display.draw(sprites);
 			Thread.sleep(2);
 		}
 		Thread.sleep(5000);

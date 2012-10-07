@@ -7,5 +7,5 @@ package com.bru.graphics.display;
  * Time: 10:45
  */
 public interface Display {
-	public void updatePixels(Change change);
+	void draw(Sprite[] sprites);
 }

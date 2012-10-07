@@ -28,12 +28,15 @@ public class BufferedCanvasTest {
 			}
 		}
 
-		final Change change = new Change(0,0,width,height,colors);
+		final Sprite sprite = new Sprite();
+
+		final Sprite[] sprites = new Sprite[1];
+		sprites[0] = sprite;
 
 		SwingUtilities.invokeAndWait(new Runnable() {
 			public void run() {
 				Display display = new BufferedCanvas(300, 200);
-				display.updatePixels(change);
+				display.draw(sprites);
 			}
 		});
 
