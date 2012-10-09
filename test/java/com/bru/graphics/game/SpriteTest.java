@@ -22,7 +22,8 @@ public class SpriteTest {
 		Sprite test2 = new Sprite(new File("test/resources/Clear4j_trans.png"));
 		Display display = new BufferedCanvas(800,600);
 		Thread.sleep(1000);
-		Sprite[] sprites = new Sprite[2];
+		Sprite[] sprites = new Sprite[2
+				];
 		sprites[0] = test;
 		sprites[1] = test2;
 		for (int i = 0; i < 400; i++){
