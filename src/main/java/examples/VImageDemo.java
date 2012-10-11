@@ -24,6 +24,7 @@ public class VImageDemo extends Component {
 			createBackBuffer();
 		}
 		do {
+
 			// First, we validate the back buffer
 			int valCode = backBuffer.validate(getGraphicsConfiguration());
 			if (valCode == VolatileImage.IMAGE_RESTORED) {
