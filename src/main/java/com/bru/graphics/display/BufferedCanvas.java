@@ -17,7 +17,10 @@ public class BufferedCanvas extends Canvas implements Display {
 
 	public BufferedCanvas(int width, int height) {
 		setSize(width, height);
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		Graphics  g = image.getGraphics();
+		g.setColor(Color.BLACK);
+		g.fillRect(0,0,width,height);
 		display();
 	}
 
@@ -43,41 +46,5 @@ public class BufferedCanvas extends Canvas implements Display {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
 }
 
-
-//	//TODO
-//	public void processFrame(byte[] frame, int width, int height) {
-//		byte[] imgData = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-//		System.arraycopy(frame, 0, imgData, 0, frame.length);
-//	}
-
-//	//TODO
-//	private BufferedImage toCompatibleImage(BufferedImage image) {
-//		// obtain the current system graphical settings
-//		GraphicsConfiguration gfx_config = GraphicsEnvironment.
-//				getLocalGraphicsEnvironment().getDefaultScreenDevice().
-//				getDefaultConfiguration();
-//
-//		/*
-//				 * if image is already compatible and optimized for current system
-//				 * settings, simply return it
-//				 */
-//		if (image.getColorModel().equals(gfx_config.getColorModel()))
-//			return image;
-//
-//		// image is not optimized, so create a new image that is
-//		BufferedImage new_image = gfx_config.createCompatibleImage(
-//				image.getWidth(), image.getHeight(), image.getTransparency());
-//
-//		// get the graphics context of the new image to draw the old image on
-//		Graphics2D g2d = (Graphics2D) new_image.getGraphics();
-//
-//		// actually draw the image and dispose of context no longer needed
-//		g2d.drawImage(image, 0, 0, null);
-//		g2d.dispose();
-//
-//		// return the new optimized image
-//		return new_image;
-//	}
