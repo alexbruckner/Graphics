@@ -21,7 +21,7 @@ public class BufferedCanvas extends Canvas implements Display {
 		display();
 	}
 
-	public void draw(Sprite[] sprites) {
+	public void draw(Sprite... sprites) {
 		for (Sprite sprite : sprites){
 			image.getRaster().setDataElements(sprite.x, sprite.y, sprite.width, sprite.height, sprite.colors);
 		}

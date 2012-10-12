@@ -35,7 +35,7 @@ public class BufferedCanvasTest {
 
 		SwingUtilities.invokeAndWait(new Runnable() {
 			public void run() {
-				Display display = new BufferedCanvas(300, 200);
+				Display display = new BufferedCanvas(800, 600);
 				display.draw(sprites);
 			}
 		});
