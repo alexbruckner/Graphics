@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.VolatileImage;
+import java.util.HashMap;
 
 public class VolatileComponent extends Component implements Display {
 
@@ -14,7 +17,14 @@ public class VolatileComponent extends Component implements Display {
         Frame f = new Frame();
         f.setSize(width, height);
         f.add(this);
+        f.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
         f.setVisible(true);
+        f.setBackground(Color.BLACK);
     }
 
     @Override
@@ -24,6 +34,7 @@ public class VolatileComponent extends Component implements Display {
     }
 
     private void draw(Graphics gBB) {
+
         if (sprites != null) {
             for (Sprite sprite : sprites) {
 
@@ -33,7 +44,9 @@ public class VolatileComponent extends Component implements Display {
                 for (int color : sprite.colors) {
 
                     gBB.setColor(getColorFromARGB(color));
-                    gBB.drawLine(sprite.x + x, sprite.y + y, sprite.x + x + 1, sprite.y + y + 1);
+                    int p_x = sprite.x + x;
+                    int p_y = sprite.y + y;
+                    gBB.drawLine(p_x, p_y, p_x, p_y);
 
                     x++;
                     if (x == sprite.width) {
@@ -45,12 +58,18 @@ public class VolatileComponent extends Component implements Display {
         }
     }
 
+    private final HashMap<Integer, Color> cachedColors = new HashMap<Integer, Color>();
     private Color getColorFromARGB(int argb) {
-        int r = (argb) & 0xFF;
-        int g = (argb >> 8) & 0xFF;
-        int b = (argb >> 16) & 0xFF;
-        int a = (argb >> 24) & 0xFF;
-        return new Color(r, g, b, a);
+        Color color = cachedColors.get(argb);
+        if (color == null) {
+            int r = (argb) & 0xFF;
+            int g = (argb >> 8) & 0xFF;
+            int b = (argb >> 16) & 0xFF;
+            int a = (argb >> 24) & 0xFF;
+            color =  new Color(r, g, b, a);
+            cachedColors.put(argb, color);
+        }
+        return color;
     }
 
     VolatileImage backBuffer = null;
