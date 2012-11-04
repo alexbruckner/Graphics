@@ -9,26 +9,6 @@ import java.awt.image.MemoryImageSource;
 
 import javax.swing.JApplet;
 
-/**
- * <p>
- * This applet shows how to use Java standard classes to write fast animations.
- * Instead of using the methods defined in <code>java.awt.Graphics</code> to
- * render the pictures, an integer array will be filled.
- * </p>
- * <p>
- * This source code was originally published at http://jakobvogel.net/
- * and may be freely passed on and used for non-commercial purposes as long as
- * this comment remains as it is.
- * </p>
- * <p>
- * Copyright (c) 2005. Please visit my homepage at <a
- * href="http://jakobvogel.net/">http://jakobvogel.net/</a> for
- * further details!
- * </p>
- *
- * @author Jakob Vogel &lt;<a
- *         href="mailto:jakob[dot]vogel[at]mytum[dot]de">jakob[dot]vogel[at]mytum[dot]de</a>&gt;
- */
 public class FastGraphics
 		extends JApplet
 		implements Runnable
@@ -42,8 +22,6 @@ public class FastGraphics
 	private Image doubleBuffer;
 
 	private Image tripleBuffer;
-
-	private Image backgroundBuffer;
 
 	/**
 	 * <p>
@@ -97,9 +75,6 @@ public class FastGraphics
 		screenConverter.setAnimated ( true );
 		screenConverter.setFullBufferUpdates ( false );
 		fastPixelBuffer = createImage ( screenConverter );
-
-		backgroundBuffer = createImage ( this.getSize ( ).width, this.getSize ( ).height );
-		renderBackground ( backgroundBuffer.getGraphics ( ) );
 
 		doubleBuffer = createImage ( this.getSize ( ).width, this.getSize ( ).height );
 		tripleBuffer = createImage ( this.getSize ( ).width, this.getSize ( ).height );
@@ -201,13 +176,7 @@ public class FastGraphics
 			screenConverter.newPixels ( );
 
 			// Copy background, the converted image into the main buffer
-			tripleGraphics.drawImage ( backgroundBuffer, 0, 0, this );
 			tripleGraphics.drawImage ( fastPixelBuffer, 0, 0, this );
-
-			// Show FPS output
-			// tripleGraphics.setColor ( Color.white );
-			// tripleGraphics.drawString ( String.valueOf ( 1000.0 / (
-			// System.currentTimeMillis ( ) - loopStart ) ), 10, 20 );
 
 			doubleGraphics.drawImage ( tripleBuffer, 0, 0, this );
 
@@ -228,23 +197,4 @@ public class FastGraphics
 		}
 	}
 
-	/**
-	 * <p>
-	 * This function is used to create a static background buffer. This image
-	 * contains a copyright message.
-	 * </p>
-	 *
-	 * @param g
-	 *        The graphics object to use for rendering.
-	 */
-	private void renderBackground ( Graphics g )
-	{
-		g.setColor ( new Color ( 255, 255, 255 ) );
-		g.fillRect ( 0, 0, getSize ( ).width, getSize ( ).height );
-
-		g.setColor ( new Color ( 85, 85, 85 ) );
-		g.fillRect ( 0, getSize ( ).height - 25, getSize ( ).width, 25 );
-		g.setColor ( new Color ( 255, 255, 255 ) );
-		g.drawString ( "FastGraphics 3.3 - (c) 2005 by Jakob Vogel", 10, getSize ( ).height - 10 );
-	}
 }
