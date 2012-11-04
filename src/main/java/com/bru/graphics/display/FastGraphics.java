@@ -66,7 +66,7 @@ public class FastGraphics
         setBackground ( new Color ( 255, 255, 255 ) );
 
         width = this.getSize ( ).width;
-        height = this.getSize ( ).height - 25;
+        height = this.getSize ( ).height;
 
         screenBuffer = new int [ width * height ];
 
@@ -192,9 +192,20 @@ public class FastGraphics
         fg.start();
         for (int i = 0; i <  fg.getWidth(); i++){
             fg.setPixel(i,10,255,0,255,0);
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
         for (int j = 0; j <  fg.getHeight(); j++){
             fg.setPixel(10,j,255,255,0,0);
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
+
     }
 }
