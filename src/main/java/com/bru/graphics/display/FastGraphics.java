@@ -78,6 +78,12 @@ public class FastGraphics
 
 		doubleGraphics = doubleBuffer.getGraphics();
 		tripleGraphics = tripleBuffer.getGraphics();
+
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				setPixel(i, j, 255, 0, 0, 0);
+			}
+		}
 	}
 
 	/**
@@ -199,25 +205,29 @@ public class FastGraphics
 	}
 
 	public void draw(Sprite... sprites) {
-		if (screenBuffer != null) {
-			for (Sprite sprite : sprites) {
+		try {
+			if (screenBuffer != null) {
+				for (Sprite sprite : sprites) {
 
-				int x = 0;
-				int y = 0;
+					int x = 0;
+					int y = 0;
 
-				for (int color : sprite.colors) {
+					for (int color : sprite.colors) {
 
-					int p_x = sprite.x + x;
-					int p_y = sprite.y + y;
-					setPixel(sprite.x + p_x, sprite.y + p_y, color);
+						int p_x = sprite.x + x;
+						int p_y = sprite.y + y;
+						setPixel(p_x, p_y, color);
 
-					x++;
-					if (x == sprite.width) {
-						x = 0;
-						y++;
+						x++;
+						if (x == sprite.width) {
+							x = 0;
+							y++;
+						}
 					}
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
